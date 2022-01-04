@@ -15,7 +15,6 @@ import java.util.Optional;
 @SpringBootApplication
 @RestController
 @RequestMapping("/cocktails")
-@CrossOrigin
 public class main {
 
 	//////////////////////////////////////////////REPOSITORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
