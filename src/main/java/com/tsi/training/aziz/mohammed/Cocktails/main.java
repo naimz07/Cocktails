@@ -31,7 +31,13 @@ public class main {
 	private Cocktail_instructionsRepository cocktail_instructionsRepository;
 
 
+	public main(GlassRepository glassRepository){
+		this.glassRepository = glassRepository;
+	}
 
+	public main(GarnishRepository garnishRepository){
+		this.garnishRepository = garnishRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(main.class, args);

@@ -1,13 +1,19 @@
 package com.tsi.training.aziz.mohammed.Cocktails;
 
 
+import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.GlassRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,49 +33,40 @@ public class GlassUnitTest {
     public void testGetGlasses() {
         Main.getAllGlasses();
         verify(glassRepository).findAll();
+    }
+
+    @Test
+    public void testGetGlass() {
+        Glass glass = new Glass();
+        glass.setName("MARTINI");
+        glass.setVolume(300);
+
+        // Setting conditions of the test
+        given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
+
+        // Setting the expected value
+        Glass expected = Main.getGlass(glass.getIdGlass()).get();
+
+        // Asserting the two values are equal
+        Assertions.assertEquals(expected, glass);
+
+        // Verifying that the findById method was called
+        verify(glassRepository, atLeastOnce()).findById(glass.getIdGlass());
     }}
 
-//    @Test
-//    public void testGetGlass() {
-//        Glass glass = new Glass();
-//        glass.setName("");
-//        glass.setVolume(568);
-//
-//        // Setting conditions of the test
-//        given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
-//
-//        // Setting the expected value
-//        Optional<Glass> expected = main.getGlass(glass.getIdGlass());
-//
-//        // Asserting the two values are equal
-//        Assertions.assertEquals(expected, glass);
-//
-//        // Verifying that the findById method was called
-//        verify(glassRepository, atLeastOnce()).findById(glass.getIdGlass());
-//    }
-//
-//    @Test
-//    public void testGetGlassNotFound() {
-//        Exception exception = Assertions.assertThrows(Exception.class, () -> {
-//            main.getGlass(anyInt());
-//        });
-//        String expected = "No glass could be found with the given ID";
-//        String actual = exception.getMessage();
-//        Assertions.assertEquals(expected, actual);
-//    }
-//
+
 //    @Test
 //    public void testAddGlass() {
 //        // Creating test object
 //        Glass glass = new Glass();
-//        glass.setName("Pint");
-//        glass.setVolume(568);
+//        glass.setName("MARTINI");
+//        glass.setVolume(300);
 //
 //        // Setting the expected return string
 //        String expected = "New Glass Saved";
 //
 //        // Adding object to the repo and capturing return value
-//        String actual = main.addAGLass(glass.getName(), glass.getVolume());
+//        String actual = Main.addAGLass(glass.getName(), glass.getVolume());
 //
 //        // Creating an argument captor
 //        ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
@@ -94,7 +91,7 @@ public class GlassUnitTest {
 //        given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
 //
 //        // Adding glass to repo
-//        main.addAGLass(glass.getName(), glass.getVolume());
+//        Main.addAGLass(glass.getName(), glass.getVolume());
 //
 //        // Updating the type of the glass
 //        glass.setName("Updated");
@@ -103,7 +100,7 @@ public class GlassUnitTest {
 //        ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
 //
 //        // Capturing the actual and expected results
-//        String actual = main.updatedGlass(glass);
+//        String actual = Main.updatedGlass(glass);
 //        String expected = "Glass Updated";
 //
 //        // Verifying if the save method has been called at least twice (initial save then update)
