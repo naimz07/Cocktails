@@ -3,8 +3,9 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.GlassRepository;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.Given;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AddAGlassStepDefinitions {
@@ -21,26 +22,25 @@ public class AddAGlassStepDefinitions {
 
 
     @Given("I have added a name for the glass")
-    public void i_have_added_a_name_for_the_glass(String name) throws Throwable {
-
-        throw new PendingException();
+    public void i_have_added_a_name_for_the_glass() throws Throwable {
+        name = "MARTINI";
     }
 
-//    @Given("I have added the volume of the glass")
-//    public void i_have_added_the_volume_of_the_glass() {
-//        volume = 200;
-//        throw new PendingException();    }
-//
-//    @When("I add the glass")
-//    public String i_add_the_glass() {
-//
-//        throw new PendingException();    }
-//
-//    @Then("The glass should be stored")
-//    public void the_glass_should_be_stored() {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new PendingException();    }
-//
+    @Given("I have added the volume of the glass")
+    public void i_have_added_the_volume_of_the_glass() {
+        volume = 200;
+        }
+
+    @When("I add the glass")
+    public void i_add_the_glass() {
+    System.out.println("Glass" + name + "with volume of" + volume + "has been added");
+    }
+
+    @Then("The glass should be stored")
+    public void the_glass_should_be_stored() {
+        System.out.println("the glass has been added");
+           }
+
 
 
 

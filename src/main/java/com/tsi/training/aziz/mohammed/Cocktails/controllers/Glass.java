@@ -60,7 +60,7 @@ public class Glass {
         this.name = name;
     }
 
-    public void setAge(int volume) {
+    public void setVolume(int volume) {
         this.volume = volume;
     }
 

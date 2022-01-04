@@ -1,8 +1,8 @@
 package com.tsi.training.aziz.mohammed.Cocktails;
 
+import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Equipment;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Garnish;
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Ingredient;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,8 @@ import java.util.Optional;
 @SpringBootApplication
 @RestController
 @RequestMapping("/cocktails")
-public class CocktailsApplication {
+@CrossOrigin
+public class main {
 
 	//////////////////////////////////////////////REPOSITORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@Autowired
@@ -29,8 +30,11 @@ public class CocktailsApplication {
 	@Autowired
 	private Cocktail_instructionsRepository cocktail_instructionsRepository;
 
+
+
+
 	public static void main(String[] args) {
-		SpringApplication.run(CocktailsApplication.class, args);
+		SpringApplication.run(main.class, args);
 	}
 
 
@@ -41,11 +45,11 @@ public class CocktailsApplication {
 		return glassRepository.findAll();
 	}
 	@GetMapping(value = "/glass/getGlass")
-	public @ResponseBody
-	Optional<Glass> getGlass(@RequestParam int idglass){
+	@ResponseBody
+	public Optional<Glass> getGlass(@RequestParam int idglass){
 		return glassRepository.findById(idglass);
 	}
-	@PostMapping(value = "glass/addGlass")
+	@PostMapping(value = "/glass/addGlass")
 	public @ResponseBody String addAGLass(@RequestParam String name,
 										  @RequestParam int volume) {
 		Glass savedGlass = new Glass(name,volume);
@@ -59,7 +63,8 @@ public class CocktailsApplication {
 	}
 
 	@PutMapping(value = "/glass/updateGlass")
-	public @ResponseBody String updatedGlass (@RequestBody Glass glass){
+	public @ResponseBody String updatedGlass (@RequestBody Glass glass)
+	{
 		glassRepository.save(glass);
 		return "Glass Updated";
 	}

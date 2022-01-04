@@ -1,4 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.tsi.training.aziz.mohammed.Cocktails.CocktailsApplicatio
- n
+Main-Class: com.tsi.training.aziz.mohammed.Cocktails.main
 
