@@ -17,6 +17,8 @@ import java.util.Optional;
 @RequestMapping("/cocktails")
 public class main {
 
+
+
 	//////////////////////////////////////////////REPOSITORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@Autowired
 	private GlassRepository glassRepository;
@@ -30,13 +32,13 @@ public class main {
 	private Cocktail_instructionsRepository cocktail_instructionsRepository;
 
 
-	public main(GlassRepository glassRepository){
+	public main(GlassRepository glassRepository, GarnishRepository garnishRepository){
 		this.glassRepository = glassRepository;
+		this.garnishRepository = garnishRepository;
+
 	}
 
-	public main(GarnishRepository garnishRepository){
-		this.garnishRepository = garnishRepository;
-	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(main.class, args);
