@@ -32,9 +32,11 @@ public class main {
 	private Cocktail_instructionsRepository cocktail_instructionsRepository;
 
 
-	public main(GlassRepository glassRepository, GarnishRepository garnishRepository){
+	public main(GlassRepository glassRepository, GarnishRepository garnishRepository, IngredientsRepository ingredientsRepository, EquipmentRepository equipmentRepository){
 		this.glassRepository = glassRepository;
 		this.garnishRepository = garnishRepository;
+		this.ingredientsRepository = ingredientsRepository;
+		this.equipmentRepository = equipmentRepository;
 
 	}
 
@@ -119,11 +121,11 @@ public class main {
 		return ingredientsRepository.findById(idingredient);
 	}
 	@PostMapping(value = "/ingredients/addIngredients")
-	public @ResponseBody String addAGarnish(@RequestParam String name,
+	public @ResponseBody String addAIngredient(@RequestParam String name,
 			@RequestParam int alcohol_Level, @RequestParam String description){
 		Ingredient savedIngredients = new Ingredient(name, alcohol_Level, description);
 		ingredientsRepository.save(savedIngredients);
-		return "New Garnish Saved";
+		return "New Ingredient Saved";
 	}
 	@DeleteMapping(value = "/ingredients/deleteIngredients")
 	public @ResponseBody String deleteIngredients(@RequestParam int idingredient){

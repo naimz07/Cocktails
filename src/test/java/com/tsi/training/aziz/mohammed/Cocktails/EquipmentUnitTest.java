@@ -1,7 +1,6 @@
 package com.tsi.training.aziz.mohammed.Cocktails;
 
-
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
+import com.tsi.training.aziz.mohammed.Cocktails.controllers.Equipment;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.EquipmentRepository;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.GarnishRepository;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.GlassRepository;
@@ -20,7 +19,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class GlassUnitTest {
+public class EquipmentUnitTest {
+
+
 
     @Mock
     private GlassRepository glassRepository;
@@ -37,85 +38,83 @@ public class GlassUnitTest {
     void setUp() {
         Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository);
     }
-
     @Test
-    public void testGetGlasses() {
-        Main.getAllGlasses();
-        verify(glassRepository).findAll();
+    public void testGetAllEquipment() {
+        Main.getAllEquipment();
+        verify(equipmentRepository).findAll();
     }
 
     @Test
-    public void testGetGlass() {
-        Glass glass = new Glass();
-        glass.setName("MARTINI");
-        glass.setVolume(300);
+    public void testGetEquipment() {
+        Equipment equipment = new Equipment();
+        equipment.setName("Blender");
+        equipment.setNeedsPower(true);
 
         // Setting conditions of the test
-        given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
+        given(equipmentRepository.findById(equipment.getIdequipment())).willReturn(Optional.of(equipment));
 
         // Setting the expected value
-        Glass expected = Main.getGlass(glass.getIdGlass()).get();
+        Equipment expected = Main.getEquipment(equipment.getIdequipment()).get();
 
         // Asserting the two values are equal
-        Assertions.assertEquals(expected, glass);
+        Assertions.assertEquals(expected, equipment);
 
         // Verifying that the findById method was called
-        verify(glassRepository, atLeastOnce()).findById(glass.getIdGlass());
+        verify(equipmentRepository, atLeastOnce()).findById(equipment.getIdequipment());
     }
 
 
     @Test
-    public void testAddGlass() {
+    public void testAddEquipment() {
         // Creating test object
-        Glass savedGlass = new Glass();
-        savedGlass.setName("MARTINI");
-        savedGlass.setVolume(300);
+        Equipment equipment = new Equipment();
+        equipment.setName("Blender");
+        equipment.setNeedsPower(true);
 
         // Setting the expected return string
-        String expected = "New Glass Saved";
+        String expected = "New Equipment Saved";
 
         // Adding object to the repo and capturing return value
-        String actual = Main.addAGLass(savedGlass.getName(), savedGlass.getVolume());
+        String actual = Main.addEquipment(equipment.getName(), equipment.getNeedsPower());
 
         // Creating an argument captor
-        ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
+        ArgumentCaptor<Equipment> equipmentArgumentCaptor = ArgumentCaptor.forClass(Equipment.class);
 
         // Verifying that save() was called on the repo
-        verify(glassRepository).save(glassArgumentCaptor.capture());
+        verify(equipmentRepository).save(equipmentArgumentCaptor.capture());
 
         // Getting the captured value
-        Glass capturedGlass = glassArgumentCaptor.getValue();
+        Equipment capturedEquipment = equipmentArgumentCaptor.getValue();
 
         // Asserting the captured value is the same as the original object
-        Assertions.assertEquals(savedGlass.toString(), capturedGlass.toString());
+        Assertions.assertEquals(equipment.toString(), capturedEquipment.toString());
         Assertions.assertEquals(expected, actual);
 
     }
-//
+    //
     @Test
-    public void testUpdateGlass() {
-        Glass glass = new Glass();
-
+    public void testUpdateEquipment() {
+        Equipment equipment = new Equipment();
         // Defining the method call in the updateGlass method and its return type
         //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
 
         // Adding glass to repo
-        Main.addAGLass(glass.getName(), glass.getVolume());
+        Main.addEquipment(equipment.getName(), equipment.getNeedsPower());
 
         // Updating the type of the glass
-        glass.setName("Updated");
+        equipment.setName("Updated");
 
         // Creating argument captor
-        ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
+        ArgumentCaptor<Equipment> equipmentArgumentCaptor = ArgumentCaptor.forClass(Equipment.class);
 
         // Capturing the actual and expected results
-        String actual = Main.updatedGlass(glass);
-        String expected = "Glass Updated";
+        String actual = Main.updatedEquipment(equipment);
+        String expected = "Equipment Updated";
 
         // Verifying if the save method has been called at least twice (initial save then update)
-        verify(glassRepository, atLeast(2)).save(glassArgumentCaptor.capture());
+        verify(equipmentRepository, atLeast(2)).save(equipmentArgumentCaptor.capture());
 
-        Glass capturedGlass = glassArgumentCaptor.getValue();
+        Equipment capturedEquipment = equipmentArgumentCaptor.getValue();
 
         // Verifying if findById has been called once
         //verify(glassRepository, atLeast(1)).findById(glass.getIdGlass());
@@ -123,24 +122,23 @@ public class GlassUnitTest {
 
         // Asserting the values are as expected
         Assertions.assertEquals(expected, actual);
-        Assertions.assertEquals(glass, capturedGlass);
+        Assertions.assertEquals(equipment, capturedEquipment);
 
     }
 
- @Test
-    public void testDeleteGlass(){
-        Glass glass = new Glass();
+    @Test
+    public void testDeleteEquipment(){
+        Equipment equipment = new Equipment();
 
         // Defining what the findById method will use and what will be returned
-       //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
+        //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
 
         // Setting actual vs expected results
-        String expected = "Glass Deleted";
-        String actual = Main.deleteGlass(glass.getIdGlass());
+        String expected = "Equipment Deleted";
+        String actual = Main.deleteEquipment(equipment.getIdequipment());
 
         // Asserting the returned strings are equal and that deleteById has been called on the repo
         Assertions.assertEquals(expected, actual);
-        verify(glassRepository).deleteById(glass.getIdGlass());
-    }}
-//
-////}
+        verify(equipmentRepository).deleteById(equipment.getIdequipment());
+    }
+}

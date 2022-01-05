@@ -64,11 +64,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public void setDescription() {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setAlcLevel() {
+    public void setAlcLevel(int alcohol_Level) {
         this.alcohol_Level = alcohol_Level;
     }
 

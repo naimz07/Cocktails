@@ -1,7 +1,6 @@
 package com.tsi.training.aziz.mohammed.Cocktails;
 
-
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
+import com.tsi.training.aziz.mohammed.Cocktails.controllers.Garnish;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.EquipmentRepository;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.GarnishRepository;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.GlassRepository;
@@ -20,7 +19,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class GlassUnitTest {
+public class GarnishUnitTest {
+
+
 
     @Mock
     private GlassRepository glassRepository;
@@ -39,83 +40,83 @@ public class GlassUnitTest {
     }
 
     @Test
-    public void testGetGlasses() {
-        Main.getAllGlasses();
-        verify(glassRepository).findAll();
+    public void testGetGarnishes() {
+        Main.getAllGarnishes();
+        verify(garnishRepository).findAll();
     }
 
     @Test
-    public void testGetGlass() {
-        Glass glass = new Glass();
-        glass.setName("MARTINI");
-        glass.setVolume(300);
+    public void testGetGarnish() {
+        Garnish garnish = new Garnish();
+        garnish.setName("Umbrella");
+        garnish.setFood(false);
 
         // Setting conditions of the test
-        given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
+        given(garnishRepository.findById(garnish.getIdGarnish())).willReturn(Optional.of(garnish));
 
         // Setting the expected value
-        Glass expected = Main.getGlass(glass.getIdGlass()).get();
+        Garnish expected = Main.getGarnish(garnish.getIdGarnish()).get();
 
         // Asserting the two values are equal
-        Assertions.assertEquals(expected, glass);
+        Assertions.assertEquals(expected, garnish);
 
         // Verifying that the findById method was called
-        verify(glassRepository, atLeastOnce()).findById(glass.getIdGlass());
+        verify(garnishRepository, atLeastOnce()).findById(garnish.getIdGarnish());
     }
 
 
     @Test
-    public void testAddGlass() {
+    public void testAddGarnish() {
         // Creating test object
-        Glass savedGlass = new Glass();
-        savedGlass.setName("MARTINI");
-        savedGlass.setVolume(300);
+        Garnish savedGarnish = new Garnish();
+        savedGarnish.setName("Umbrella");
+        savedGarnish.setFood(false);
 
         // Setting the expected return string
-        String expected = "New Glass Saved";
+        String expected = "New Garnish Saved";
 
         // Adding object to the repo and capturing return value
-        String actual = Main.addAGLass(savedGlass.getName(), savedGlass.getVolume());
+        String actual = Main.addAGarnish(savedGarnish.getName(), savedGarnish.getFood());
 
         // Creating an argument captor
-        ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
+        ArgumentCaptor<Garnish> garnishArgumentCaptor = ArgumentCaptor.forClass(Garnish.class);
 
         // Verifying that save() was called on the repo
-        verify(glassRepository).save(glassArgumentCaptor.capture());
+        verify(garnishRepository).save(garnishArgumentCaptor.capture());
 
         // Getting the captured value
-        Glass capturedGlass = glassArgumentCaptor.getValue();
+        Garnish capturedGarnish = garnishArgumentCaptor.getValue();
 
         // Asserting the captured value is the same as the original object
-        Assertions.assertEquals(savedGlass.toString(), capturedGlass.toString());
+        Assertions.assertEquals(savedGarnish.toString(), capturedGarnish.toString());
         Assertions.assertEquals(expected, actual);
 
     }
-//
+    //
     @Test
-    public void testUpdateGlass() {
-        Glass glass = new Glass();
+    public void testUpdateGarnish() {
+        Garnish garnish = new Garnish();
 
         // Defining the method call in the updateGlass method and its return type
         //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
 
         // Adding glass to repo
-        Main.addAGLass(glass.getName(), glass.getVolume());
+        Main.addAGarnish(garnish.getName(), garnish.getFood());
 
         // Updating the type of the glass
-        glass.setName("Updated");
+        garnish.setName("Updated");
 
         // Creating argument captor
-        ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
+        ArgumentCaptor<Garnish> garnishArgumentCaptor = ArgumentCaptor.forClass(Garnish.class);
 
         // Capturing the actual and expected results
-        String actual = Main.updatedGlass(glass);
-        String expected = "Glass Updated";
+        String actual = Main.updatedGarnish(garnish);
+        String expected = "Garnish Updated";
 
         // Verifying if the save method has been called at least twice (initial save then update)
-        verify(glassRepository, atLeast(2)).save(glassArgumentCaptor.capture());
+        verify(garnishRepository, atLeast(2)).save(garnishArgumentCaptor.capture());
 
-        Glass capturedGlass = glassArgumentCaptor.getValue();
+        Garnish capturedGarnish = garnishArgumentCaptor.getValue();
 
         // Verifying if findById has been called once
         //verify(glassRepository, atLeast(1)).findById(glass.getIdGlass());
@@ -123,24 +124,21 @@ public class GlassUnitTest {
 
         // Asserting the values are as expected
         Assertions.assertEquals(expected, actual);
-        Assertions.assertEquals(glass, capturedGlass);
+        Assertions.assertEquals(garnish, capturedGarnish);
 
     }
 
- @Test
-    public void testDeleteGlass(){
-        Glass glass = new Glass();
+    @Test
+    public void testDeleteGarnish(){
+        Garnish garnish = new Garnish();
 
         // Defining what the findById method will use and what will be returned
-       //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
+        //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
 
         // Setting actual vs expected results
-        String expected = "Glass Deleted";
-        String actual = Main.deleteGlass(glass.getIdGlass());
+        String expected = "Garnish Deleted";
+        String actual = Main.deleteGarnish(garnish.getIdGarnish());
 
         // Asserting the returned strings are equal and that deleteById has been called on the repo
         Assertions.assertEquals(expected, actual);
-        verify(glassRepository).deleteById(glass.getIdGlass());
-    }}
-//
-////}
+        verify(glassRepository).deleteById(garnish.getIdGarnish());}}
