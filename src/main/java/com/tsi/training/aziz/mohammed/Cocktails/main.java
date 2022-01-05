@@ -1,9 +1,6 @@
 package com.tsi.training.aziz.mohammed.Cocktails;
 
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Equipment;
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Garnish;
-import com.tsi.training.aziz.mohammed.Cocktails.controllers.Ingredient;
+import com.tsi.training.aziz.mohammed.Cocktails.controllers.*;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -29,14 +26,17 @@ public class main {
 	@Autowired
 	private EquipmentRepository equipmentRepository;
 	@Autowired
+	private CocktailsRepository cocktailsRepository;
+	@Autowired
 	private Cocktail_instructionsRepository cocktail_instructionsRepository;
 
 
-	public main(GlassRepository glassRepository, GarnishRepository garnishRepository, IngredientsRepository ingredientsRepository, EquipmentRepository equipmentRepository){
+	public main(GlassRepository glassRepository, GarnishRepository garnishRepository, IngredientsRepository ingredientsRepository, EquipmentRepository equipmentRepository, CocktailsRepository cocktailsRepository){
 		this.glassRepository = glassRepository;
 		this.garnishRepository = garnishRepository;
 		this.ingredientsRepository = ingredientsRepository;
 		this.equipmentRepository = equipmentRepository;
+		this. cocktailsRepository = cocktailsRepository;
 
 	}
 
@@ -99,7 +99,7 @@ public class main {
 	}
 	@DeleteMapping(value = "/garnish/deleteGarnish")
 	public @ResponseBody String deleteGarnish(@RequestParam int idgarnish){
-		glassRepository.deleteById(idgarnish);
+		garnishRepository.deleteById(idgarnish);
 		return "Garnish Deleted";
 	}
 	@PutMapping(value = "/garnish/updateGarnish")
@@ -168,15 +168,44 @@ public class main {
 		return "Equipment Updated";
 	}
 
+	/////////////////////////////////////////////COCKTAILS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	@GetMapping(value = "/cocktail/getAll")
+	public @ResponseBody
+	Iterable<Cocktail> getAllCocktails(){
+		return cocktailsRepository.findAll();
+	}
+	@GetMapping(value = "/cocktail/getCocktail")
+	public @ResponseBody
+	Optional<Cocktail> getCocktail(@RequestParam int idcocktail){
+		return cocktailsRepository.findById(idcocktail);
+	}
+	@PostMapping(value = "/cocktail/addCocktail")
+	public @ResponseBody String addCocktail(@RequestParam String name,
+											 @RequestParam String description, @RequestParam int price){
+		Cocktail savedCocktail = new Cocktail(name, description, price);
+		cocktailsRepository.save(savedCocktail);
+		return "New Cocktail Saved";
+	}
+	@DeleteMapping(value = "/cocktail/deleteCocktail")
+	public @ResponseBody String deleteCocktail(@RequestParam int idcocktail){
+		cocktailsRepository.deleteById(idcocktail);
+		return "Cocktail Deleted";
+	}
+	@PutMapping(value = "/cocktail/updateCocktail")
+	public @ResponseBody String updatedCocktail (@RequestBody Cocktail cocktail){
+		cocktailsRepository.save(cocktail);
+		return "Cocktail Updated";
+	}
 
 	///////////////////////////////////COCKTAIL INSTRUCTIONS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-	@GetMapping(value = "/cocktailInstructions/getAll")
-	public @ResponseBody
-	Iterable<cocktail_instruction> getAllCocktailInstructions(){
-		return cocktail_instructionsRepository.findAll();
-	}
-
+//	@GetMapping(value = "/cocktailInstructions/getAll")
+//	public @ResponseBody
+//	Iterable<cocktail_instruction> getAllCocktailInstructions(){
+//		return cocktail_instructionsRepository.findAll();
+//	}
+//
 
 
 

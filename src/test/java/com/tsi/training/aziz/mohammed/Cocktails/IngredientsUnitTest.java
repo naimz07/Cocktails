@@ -1,10 +1,7 @@
 package com.tsi.training.aziz.mohammed.Cocktails;
 
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Ingredient;
-import com.tsi.training.aziz.mohammed.Cocktails.repositories.EquipmentRepository;
-import com.tsi.training.aziz.mohammed.Cocktails.repositories.GarnishRepository;
-import com.tsi.training.aziz.mohammed.Cocktails.repositories.GlassRepository;
-import com.tsi.training.aziz.mohammed.Cocktails.repositories.IngredientsRepository;
+import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,12 +27,14 @@ public class IngredientsUnitTest {
     private IngredientsRepository ingredientsRepository;
     @Mock
     private EquipmentRepository equipmentRepository;
+    @Mock
+    private CocktailsRepository cocktailsRepository;
 
     private main Main;
 
     @BeforeEach
     void setUp() {
-        Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository);
+        Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }
 
     @Test
