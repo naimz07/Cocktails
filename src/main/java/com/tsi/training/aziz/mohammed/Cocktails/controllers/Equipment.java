@@ -62,7 +62,8 @@ public class Equipment {
         this.needsPower = needsPower;
     }
 
-    public void setIdequipment(int idequipment) {
-        this.idequipment = idequipment;
-    }
+//    public void setIdequipment(int idequipment) {
+//        this.idequipment = idequipment;
+//    }
+    
 }

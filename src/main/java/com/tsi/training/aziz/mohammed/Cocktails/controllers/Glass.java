@@ -52,9 +52,9 @@ public class Glass {
 
     //////////////////////////////////////SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public void setIdGlass(int idGlass) {
-        this.idglass = idGlass;
-    }
+//    public void setIdGlass(int idGlass) {
+//        this.idglass = idGlass;
+//    }
 
     public void setName(String name) {
         this.name = name;

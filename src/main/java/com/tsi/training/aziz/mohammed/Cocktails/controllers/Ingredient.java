@@ -72,9 +72,9 @@ public class Ingredient {
         this.alcohol_Level = alcohol_Level;
     }
 
-    public void setIdingredient(int idingredient) {
-        this.idingredient = idingredient;
-    }
+    //public void setIdingredient(int idingredient) {
+    //    this.idingredient = idingredient;
+    //}
 
 
 }

@@ -61,9 +61,9 @@ public class Cocktail {
 
     ////////////////////////////////////////SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public void setIdcocktail(int idcocktail) {
-        this.idcocktail = idcocktail;
-    }
+//    public void setIdcocktail(int idcocktail) {
+//        this.idcocktail = idcocktail;
+//    }
 
     public void setName(String name) {
         this.name = name;

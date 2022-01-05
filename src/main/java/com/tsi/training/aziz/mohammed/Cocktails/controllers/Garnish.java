@@ -61,9 +61,9 @@ public class Garnish {
         this.food = food;
     }
 
-    public void setIdGarnish(int idGarnish) {
-        this.idgarnish = idGarnish;
-    }
+//    public void setIdGarnish(int idGarnish) {
+//        this.idgarnish = idGarnish;
+//    }
 
 
 }
