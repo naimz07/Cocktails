@@ -65,5 +65,5 @@ public class Equipment {
 //    public void setIdequipment(int idequipment) {
 //        this.idequipment = idequipment;
 //    }
-    
+
 }

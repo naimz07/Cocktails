@@ -12,6 +12,7 @@ import java.util.Optional;
 @SpringBootApplication
 @RestController
 @RequestMapping("/cocktails")
+@CrossOrigin
 public class main {
 
 
@@ -72,8 +73,10 @@ public class main {
 	}
 
 	@PutMapping(value = "/glass/updateGlass")
-	public @ResponseBody String updatedGlass (@RequestBody Glass glass)
+	public @ResponseBody String updatedGlass (@RequestBody Glass glass,@RequestParam int idglass, @RequestParam String name, @RequestParam int volume )
 	{
+		glass.setName(name);
+		glass.setVolume(volume);
 		glassRepository.save(glass);
 		return "Glass Updated";
 	}

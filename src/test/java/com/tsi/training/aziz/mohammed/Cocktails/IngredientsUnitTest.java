@@ -2,8 +2,8 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Ingredient;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -32,7 +32,7 @@ public class IngredientsUnitTest {
 
     private main Main;
 
-    @BeforeEach
+    @Before
     void setUp() {
         Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }

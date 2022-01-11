@@ -39,6 +39,12 @@ public class EquipmentUnitTest {
     }
 
     @Test
+    public void testGetAllEquipment(){
+        Main.getAllEquipment();
+        verify(equipmentRepository).findAll();
+    }
+
+    @Test
     public void testGetEquipment() {
         Equipment equipment = new Equipment();
         equipment.setName("Blender");

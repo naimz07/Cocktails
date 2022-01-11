@@ -96,35 +96,15 @@ public class GlassUnitTest {
     @Test
     public void testUpdateGlass() {
         Glass glass = new Glass();
-
-        // Defining the method call in the updateGlass method and its return type
-        //given(glassRepository.findById(glass.getIdGlass())).willReturn(Optional.of(glass));
-
-        // Adding glass to repo
-        Main.addAGLass(glass.getName(), glass.getVolume());
-
-        // Updating the type of the glass
-        glass.setName("Updated");
-
-        // Creating argument captor
+        int idglass = 0;
+        String name = "test glass";
+        int volume = 500;
+        String actualReturn = Main.updatedGlass(glass, idglass, name, volume);
+        String expectedReturn = "Glass Updated";
+        Assertions.assertEquals(expectedReturn, actualReturn);
         ArgumentCaptor<Glass> glassArgumentCaptor = ArgumentCaptor.forClass(Glass.class);
+        verify(glassRepository).save(glassArgumentCaptor.capture());
 
-        // Capturing the actual and expected results
-        String actual = Main.updatedGlass(glass);
-        String expected = "Glass Updated";
-
-        // Verifying if the save method has been called at least twice (initial save then update)
-        verify(glassRepository, atLeast(2)).save(glassArgumentCaptor.capture());
-
-        Glass capturedGlass = glassArgumentCaptor.getValue();
-
-        // Verifying if findById has been called once
-        //verify(glassRepository, atLeast(1)).findById(glass.getIdGlass());
-
-
-        // Asserting the values are as expected
-        Assertions.assertEquals(expected, actual);
-        Assertions.assertEquals(glass, capturedGlass);
 
     }
 
@@ -143,5 +123,15 @@ public class GlassUnitTest {
         Assertions.assertEquals(expected, actual);
         verify(glassRepository).deleteById(glass.getIdGlass());
     }}
+
+//    @Test
+//    void testDeleteGlassNotFound(){
+//        Exception exception = Assertions.assertThrows(Exception.class, () -> {
+//            glassService.deleteGlass(anyInt());
+//        });
+//        String expected = "No glass could be found with the given ID";
+//        String actual = exception.getMessage();
+//        Assertions.assertEquals(expected, actual);
+//    }
 //
 ////}

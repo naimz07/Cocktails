@@ -7,5 +7,5 @@ Feature: Add a glass
     Scenario: Successfully add a glass to the database
         Given I have added a name for the glass
         And I have added the volume of the glass
-        When I add the glass
-        Then The glass should be stored
+        When I submit a request to add the glass
+        Then The glass is saved to the database
