@@ -2,13 +2,14 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Ingredient;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class IngredientsUnitTest {
+
 
 
     @Mock
@@ -32,18 +34,19 @@ public class IngredientsUnitTest {
 
     private main Main;
 
-    @Before
+    @BeforeMethod
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetGlasses() {
         Main.getAllGlasses();
         verify(glassRepository).findAll();
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetIngredients() {
         Ingredient ingredient = new Ingredient();
         ingredient.setName("Ice");
@@ -64,7 +67,7 @@ public class IngredientsUnitTest {
     }
 
 
-    @Test
+    @org.testng.annotations.Test
     public void testAddIngredient() {
         // Creating test object
         Ingredient ingredient = new Ingredient();
@@ -93,7 +96,7 @@ public class IngredientsUnitTest {
 
     }
     //
-    @Test
+    @org.testng.annotations.Test
     public void testUpdateIngredient() {
         Ingredient ingredient = new Ingredient();
 

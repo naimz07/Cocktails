@@ -4,17 +4,19 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Glass;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class GlassUnitTest {
@@ -32,18 +34,20 @@ public class GlassUnitTest {
 
     private main Main;
 
-    @BeforeEach
-    void setUp() {
-        Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
+    @BeforeMethod
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        Main = new main(
+                glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetGlasses() {
         Main.getAllGlasses();
         verify(glassRepository).findAll();
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetGlass() {
         Glass glass = new Glass();
         glass.setName("MARTINI");
@@ -64,7 +68,7 @@ public class GlassUnitTest {
     }
 
 
-    @Test
+    @org.testng.annotations.Test
     public void testAddGlass() {
         // Creating test object
         Glass savedGlass = new Glass();
@@ -93,7 +97,7 @@ public class GlassUnitTest {
 
     }
 //
-    @Test
+    @org.testng.annotations.Test
     public void testUpdateGlass() {
         Glass glass = new Glass();
         int idglass = 0;

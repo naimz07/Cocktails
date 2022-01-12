@@ -32,7 +32,7 @@ public class AddAGarnishStepDef {
 
         Iterable<Garnish> actualGarnish;
         List<Integer> garnishIDs = new ArrayList<Integer>();
-
+        String url = "http://localhost:8080/cocktails/garnish/getAll";
         Response response;
         //JsonPath json;
 
@@ -55,7 +55,7 @@ public class AddAGarnishStepDef {
         public void i_submit_a_request_to_add_the_garnish(){
 
             //response = RestAssured.post("http://localhost:8080/cocktails/garnish/addGarnish?name=Test&food=false");
-            String url = "http://localhost:8080/cocktails/garnish/getAll";
+
             response = RestAssured.get(url);
             Assertions.assertEquals(200, response.getStatusCode());
             Main.addAGarnish(name, food);
@@ -64,7 +64,7 @@ public class AddAGarnishStepDef {
         @Then("The garnish is saved to the database")
         public void the_glass_is_saved_to_the_database(){
 
-
+            response = RestAssured.get(url);
             String returnedString = response.getBody().asString();
             Assertions.assertTrue(returnedString.contains(name));
 

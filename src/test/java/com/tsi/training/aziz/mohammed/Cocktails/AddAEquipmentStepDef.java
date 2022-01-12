@@ -26,7 +26,7 @@ public class AddAEquipmentStepDef {
 
     String name;
     boolean needsPower;
-
+    String url = "http://localhost:8080/cocktails/equipment/getAll";
     Iterable<Equipment> actualEquipment;
     List<Integer> equipmentIDs = new ArrayList<Integer>();
     Response response;
@@ -47,7 +47,7 @@ public class AddAEquipmentStepDef {
     @When("I submit a request to add the equipment")
     public void i_submit_a_request_to_add_the_equipment(){
 
-        String url = "http://localhost:8080/cocktails/equipment/getAll";
+
         response = RestAssured.get(url);
         Assertions.assertEquals(200, response.getStatusCode());
         Main.addEquipment(name, needsPower);
@@ -56,6 +56,7 @@ public class AddAEquipmentStepDef {
     @Then("The equipment is saved to the database")
     public void the_equipment_is_saved_to_the_database(){
 
+        response = RestAssured.get(url);
         String returnedString = response.getBody().asString();
         Assertions.assertTrue(returnedString.contains(name));
         // Assertions.assertEquals(glass.getVolume(), returnString);

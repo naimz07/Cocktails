@@ -3,12 +3,13 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Garnish;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.Optional;
 
@@ -33,8 +34,9 @@ public class GarnishUnitTest {
 
     private main Main;
 
-    @BeforeEach
+    @BeforeMethod
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }
 
@@ -44,7 +46,7 @@ public class GarnishUnitTest {
         verify(garnishRepository).findAll();
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetGarnish() {
         Garnish garnish = new Garnish();
         garnish.setName("Umbrella");
@@ -64,7 +66,7 @@ public class GarnishUnitTest {
     }
 
 
-    @Test
+    @org.testng.annotations.Test
     public void testAddGarnish() {
         // Creating test object
         Garnish savedGarnish = new Garnish();
@@ -92,7 +94,7 @@ public class GarnishUnitTest {
 
     }
     //
-    @Test
+    @org.testng.annotations.Test
     public void testUpdateGarnish() {
         Garnish garnish = new Garnish();
 
@@ -127,7 +129,7 @@ public class GarnishUnitTest {
 
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testDeleteGarnish(){
         Garnish garnish = new Garnish();
 

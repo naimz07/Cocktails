@@ -3,12 +3,13 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Cocktail;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.Optional;
 
@@ -31,17 +32,18 @@ public class CocktailUnitTest {
 
     private main Main;
 
-    @BeforeEach
+    @BeforeMethod
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }
-    @Test
+    @org.testng.annotations.Test
     public void testGetAllCocktails() {
         Main.getAllCocktails();
         verify(cocktailsRepository).findAll();
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetCocktail() {
         Cocktail cocktail = new Cocktail();
         cocktail.setName("Mojito");
@@ -62,7 +64,7 @@ public class CocktailUnitTest {
     }
 
 
-    @Test
+    @org.testng.annotations.Test
     public void testAddCocktail() {
         // Creating test object
         Cocktail cocktail = new Cocktail();
@@ -91,7 +93,7 @@ public class CocktailUnitTest {
 
     }
     //
-    @Test
+    @org.testng.annotations.Test
     public void testUpdateCocktail() {
         Cocktail cocktail = new Cocktail();
 

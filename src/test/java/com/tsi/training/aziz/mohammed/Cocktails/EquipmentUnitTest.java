@@ -3,12 +3,13 @@ package com.tsi.training.aziz.mohammed.Cocktails;
 import com.tsi.training.aziz.mohammed.Cocktails.controllers.Equipment;
 import com.tsi.training.aziz.mohammed.Cocktails.repositories.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.Optional;
 
@@ -33,18 +34,19 @@ public class EquipmentUnitTest {
 
     private main Main;
 
-    @BeforeEach
+    @BeforeMethod
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         Main = new main(glassRepository, garnishRepository, ingredientsRepository, equipmentRepository, cocktailsRepository);
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetAllEquipment(){
         Main.getAllEquipment();
         verify(equipmentRepository).findAll();
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void testGetEquipment() {
         Equipment equipment = new Equipment();
         equipment.setName("Blender");
@@ -64,7 +66,7 @@ public class EquipmentUnitTest {
     }
 
 
-    @Test
+    @org.testng.annotations.Test
     public void testAddEquipment() {
         // Creating test object
         Equipment equipment = new Equipment();
@@ -92,7 +94,7 @@ public class EquipmentUnitTest {
 
     }
     //
-    @Test
+    @org.testng.annotations.Test
     public void testUpdateEquipment() {
         Equipment equipment = new Equipment();
         // Defining the method call in the updateGlass method and its return type

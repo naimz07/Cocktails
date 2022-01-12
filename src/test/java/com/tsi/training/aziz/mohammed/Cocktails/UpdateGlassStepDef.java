@@ -18,6 +18,7 @@ import java.util.List;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class UpdateGlassStepDef {
 
+
     String updatedName;
     int updatedVolume;
     int ID;
@@ -36,7 +37,7 @@ public class UpdateGlassStepDef {
 
     @Given("There is a glass to be updated")
     public void thereIsAGlassToBeUpdated() {
-        String name = "old name 10";
+        String name = "old name 11";
         //String volumeStr = "300";
         int volume = 300;
         response = RestAssured.get(url);
@@ -63,12 +64,13 @@ public class UpdateGlassStepDef {
 
     @And("I have provided an updates name and volume")
     public void iHaveProvidedAnUpdatesNameAndVolume() {
-        updatedName = "new name 5";
+        updatedName = "new name 7";
         updatedVolume = 500;
     }
 
     @When("I submit a request to update the glass")
     public void iSubmitARequestToUpdateTheGlass() {
+        response = RestAssured.get(url);
         Glass glass = new Glass();
         Main.updatedGlass(glass, ID, updatedName, updatedVolume);
     }

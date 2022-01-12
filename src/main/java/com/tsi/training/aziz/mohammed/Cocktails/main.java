@@ -19,17 +19,17 @@ public class main {
 
 	//////////////////////////////////////////////REPOSITORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@Autowired
-	private GlassRepository glassRepository;
+	GlassRepository glassRepository;
 	@Autowired
-	private GarnishRepository garnishRepository;
+	GarnishRepository garnishRepository;
 	@Autowired
-	private IngredientsRepository ingredientsRepository;
+	IngredientsRepository ingredientsRepository;
 	@Autowired
-	private EquipmentRepository equipmentRepository;
+	EquipmentRepository equipmentRepository;
 	@Autowired
-	private CocktailsRepository cocktailsRepository;
+	CocktailsRepository cocktailsRepository;
 	@Autowired
-	private Cocktail_instructionsRepository cocktail_instructionsRepository;
+	Cocktail_instructionsRepository cocktail_instructionsRepository;
 
 
 	public main(GlassRepository glassRepository, GarnishRepository garnishRepository, IngredientsRepository ingredientsRepository, EquipmentRepository equipmentRepository, CocktailsRepository cocktailsRepository){
